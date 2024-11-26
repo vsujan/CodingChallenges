@@ -15,8 +15,14 @@ const searchMatrix = (matrix, target) => {
     let result = false;
     for (let i = 0; i < length; i++) {
         const lengthOfEachMatrix = matrix[i].length;
-        if (matrix[0][lengthOfEachMatrix - 1] >= target) {
-            result = matrix[0].includes(target);
+        if (target <= matrix[i][lengthOfEachMatrix - 1]) {
+            for (let j = 0; j < lengthOfEachMatrix; j++) {
+                result = target === matrix[i][j];
+                if (result) {
+                    break;
+                }
+            }
+            break;
         }
     }
     return result;
