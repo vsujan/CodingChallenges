@@ -11,43 +11,16 @@ Input: s = "" "" Output: true Explanation: s is an empty string """" after remov
 */
 
 const isValidPalindrome = (s: string): boolean => {
-  const sInLowerCase: string = s.toLowerCase();
-  const validChars: string[] = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ];
-  const sArr: string[] = [...sInLowerCase];
-  let originalValidArr: string[] = [];
-  let reverseArr: string[] = [];
-  for (let i: number = 0; i < sArr.length; i++) {
-    if (validChars.includes(sArr[i])) {
-      originalValidArr.push(sArr[i]);
-      reverseArr = [sArr[i], ...reverseArr];
+  const cleaned = s.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+  let left = 0,
+    right = cleaned.length - 1;
+  while (left < right) {
+    if (cleaned[left] !== cleaned[right]) {
+      return false;
     }
+    left++;
+    right--;
   }
-  return originalValidArr.every((item, index) => item === reverseArr[index]);
+
+  return true;
 };

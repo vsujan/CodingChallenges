@@ -11,43 +11,14 @@ example 3:
 Input: s = "" "" Output: true Explanation: s is an empty string """" after removing non-alphanumeric characters Since an empty string reads the same forward and backward, it is a palindrome.
 */
 const isValidPalindrome = (s) => {
-    const sInLowerCase = s.toLowerCase();
-    const validChars = [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "t",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
-    ];
-    const sArr = [...sInLowerCase];
-    let originalValidArr = [];
-    let reverseArr = [];
-    for (let i = 0; i < sArr.length; i++) {
-        if (validChars.includes(sArr[i])) {
-            originalValidArr.push(sArr[i]);
-            reverseArr = [sArr[i], ...reverseArr];
+    const cleaned = s.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+    let left = 0, right = cleaned.length - 1;
+    while (left < right) {
+        if (cleaned[left] !== cleaned[right]) {
+            return false;
         }
+        left++;
+        right--;
     }
-    return originalValidArr.every((item, index) => item === reverseArr[index]);
+    return true;
 };
